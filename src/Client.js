@@ -45,24 +45,14 @@ class Input extends Component {
   }
 }
 
-const clientIdStateToProps = stateToProps("clientId", "Cliient ID");
-const clientIdDispatchToProps = dispatchToProps(SET_CLIENT_ID, "clientId");
-const ClientId = connect(clientIdStateToProps, clientIdDispatchToProps)(Input);
+function makeInput(field, label, action) {
+  return connect(stateToProps(field, label), dispatchToProps(action, field))(Input);  
+}
 
-const clientSecretStateToProps = stateToProps("clientSecret", "Cliient Secret");
-const clientSecretDispatchToProps = dispatchToProps(SET_CLIENT_SECRET, "clientSecret");
-const ClientSecret = connect(clientSecretStateToProps, clientSecretDispatchToProps)(Input);
-
-const customerIdStateToProps = stateToProps("customerId", "Cuustomer ID");
-const customerIdDispatchToProps = dispatchToProps(SET_CUSTOMER_ID, "customerId");
-const CustomerId = connect(customerIdStateToProps, customerIdDispatchToProps)(Input);
-
-const accountIdStateToProps = stateToProps("accountId", "Acccount ID");
-const accountIdDispatchToProps = dispatchToProps(SET_ACCOUNT_ID, "accountId");
-const AccountId = connect(accountIdStateToProps, accountIdDispatchToProps)(Input);
-
-const accessTokenStateToProps = stateToProps("accessToken", "Acccesss Token");
-const accessTokenDispatchToProps = dispatchToProps(SET_ACCESS_TOKEN, "accessToken");
-const AccessToken = connect(accessTokenStateToProps, accessTokenDispatchToProps)(Input);
+const ClientId = makeInput("clientId", "Client ID", SET_CLIENT_ID);
+const ClientSecret = makeInput("clientSecret", "Client Secret", SET_CLIENT_SECRET);
+const CustomerId = makeInput("customerId", "Customer ID", SET_CUSTOMER_ID);
+const AccountId = makeInput("accountId", "Account ID", SET_ACCOUNT_ID);
+const AccessToken = makeInput("accessToken", "Access Token", SET_ACCESS_TOKEN);
 
 export {ClientId, ClientSecret, CustomerId, AccountId, AccessToken};

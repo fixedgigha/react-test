@@ -13,6 +13,7 @@ const SET_CLIENT_SECRET = "SET_CLIENT_SECRET";
 const SET_CUSTOMER_ID = "SET_CUSTOMER_ID";
 const SET_ACCOUNT_ID = "SET_ACCOUNT_ID";
 const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
+const REQUEST_AUTHORIZE = "REQUEST_AUTHORIZE";
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -27,9 +28,12 @@ function rootReducer(state = initialState, action) {
             return objectAssign({}, state, {accountId: action.accessId});
         case SET_ACCESS_TOKEN:
             return objectAssign({}, state, {accessToken: action.accessToken});
+        case REQUEST_AUTHORIZE:
+            alert(`Howdy >> ${state.clientId}`);
+            return state;    
         default:
             return state;
     }
 }
 
-export {rootReducer, SET_CLIENT_ID, SET_ACCESS_TOKEN, SET_ACCOUNT_ID, SET_CLIENT_SECRET, SET_CUSTOMER_ID};
+export {rootReducer, SET_CLIENT_ID, SET_ACCESS_TOKEN, SET_ACCOUNT_ID, SET_CLIENT_SECRET, SET_CUSTOMER_ID, REQUEST_AUTHORIZE};

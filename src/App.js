@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {Panel, Col, Form} from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
-import {ClientId, ClientSecret, CustomerId, AccountId, AccessToken} from './Client'
+import {ClientId, ClientSecret, CustomerId, AccountId, AccessToken} from './Client';
+import {Authorize} from './Buttons';
 
 class App extends Component {
   render() {
@@ -16,11 +17,12 @@ class App extends Component {
         <Col lg="4">
           <Panel header={"Enter details"} md='4'>
             <Form horizontal>
-              <ClientId clientId="12345678"/>
-              <ClientSecret clientSecret="5Hhhhhhh"/>
-              <CustomerId customerId="1077777777"/>
-              <AccountId accountId=""/>
-              <AccessToken accessToken=""/>
+              <ClientId/>
+              <ClientSecret/>
+              <CustomerId/>
+              <AccountId/>
+              <AccessToken/>
+              <Authorize/>
             </Form>
           </Panel>
         </Col>
