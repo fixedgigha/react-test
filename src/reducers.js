@@ -1,3 +1,5 @@
+import request from 'superagent';
+
 const objectAssign = require('object-assign');
 
 const initialState = {
@@ -15,6 +17,18 @@ const SET_ACCOUNT_ID = "SET_ACCOUNT_ID";
 const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
 const REQUEST_AUTHORIZE = "REQUEST_AUTHORIZE";
 
+const defaultRedirectUri = encodeURI("http://localhost:3010/third-party/redirect");
+
+function authoriseRequest(bearerToken, clientId, redirectUri = defaultRedirectUri) {
+    request.get("http://localhost:3010/oauth2/authorize?response_type=code" +
+                `&client_id=${clientId}&redirect_uri=${redirectUri}`)/*.
+                set("Authorization", `Bearer ${bearerToken}`)*/.end(
+                    function(err, response) {
+                        console.log(`AUTH RESPONSE${JSON.stringify(response.body)}`);
+                    }
+                )
+}
+
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case SET_CLIENT_ID:
@@ -29,7 +43,7 @@ function rootReducer(state = initialState, action) {
         case SET_ACCESS_TOKEN:
             return objectAssign({}, state, {accessToken: action.accessToken});
         case REQUEST_AUTHORIZE:
-            alert(`Howdy >> ${state.clientId}`);
+            authoriseRequest(state.accessToken, state.clientId);
             return state;    
         default:
             return state;

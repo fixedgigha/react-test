@@ -1,16 +1,25 @@
 import React from 'react';
-import ReactDOM, { render } from 'react-dom';
+import {Router, Route, browserHistory} from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { render } from 'react-dom';
 import {Provider} from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import App from './App';
 import {rootReducer} from './reducers';
 import './index.css';
 
+
 const store = createStore(rootReducer);
+//const history = syncHistoryWithStore(browserHistory, store);
+console.log(`Indexx ${history}`);
+const Root = ({store}) => (
+  <Provider store={store}>
+    <App/>
+  </Provider>
+);
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root store={store}/>,
   document.getElementById('root')
 );
+
